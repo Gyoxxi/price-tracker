@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cron = require('node-cron');
 const { fetchPrice } = require('./scraper');
 const { sendAlert } = require('./mailer');
 const { PRICE_THRESHOLD } = require('./config');
@@ -21,4 +22,5 @@ async function runCheck() {
   }
 }
 
+cron.schedule('0 9 * * *', runCheck);
 runCheck();
