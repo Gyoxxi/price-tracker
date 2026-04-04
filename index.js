@@ -1,9 +1,7 @@
 require('dotenv').config();
-const cron = require('node-cron');
 const { fetchPrice } = require('./scraper');
 const { sendAlert } = require('./mailer');
 const { PRICE_THRESHOLD } = require('./config');
-
 
 async function runCheck() {
   console.log(`[${new Date().toISOString()}] Running price check...`);
@@ -19,11 +17,8 @@ async function runCheck() {
     }
   } catch (err) {
     console.error('Check failed:', err.message);
+    process.exit(1);
   }
 }
 
-// Run every day at 9 AM
-cron.schedule('0 9 * * *', runCheck);
-
-// Also run once immediately on startup
 runCheck();
