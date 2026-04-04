@@ -9,6 +9,7 @@ async function fetchPrice() {
   });
 
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
+  await page.screenshot({ path: 'screenshot.png', fullPage: true }); // add this
   await page.waitForSelector('.a-price .a-offscreen', { timeout: 10000 });
 
   const priceText = await page.$eval('.a-price .a-offscreen', el => el.textContent);
