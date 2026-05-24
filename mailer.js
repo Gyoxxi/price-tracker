@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer');
-const { URL } = require('./config');
+const { AMZ_URL } = require('./config');
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -16,7 +16,7 @@ async function sendAlert(price) {
     subject: `🐾 Price Drop Alert! Cat feeder is now $${price}`,
     html: `
       <h2>Price dropped to <strong>$${price}</strong></h2>
-      <p><a href=${URL}>Buy on Amazon</a></p>
+      <p><a href=${AMZ_URL}>Buy on Amazon</a></p>
     `,
   });
 }
